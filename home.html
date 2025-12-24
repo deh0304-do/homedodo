@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025 Christmas Home Party Guide - Presentation</title>
+    
+    <!-- Reveal.js CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css" id="theme">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        /* --- 1. Typography Settings (User Requested) --- */
+        :root {
+            --title-size: 24pt;
+            --body-size: 17pt;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text-color: #ffffff;
+            --accent-color: #ff4d6d;
+        }
+
+        body {
+            /* Animated Deep Christmas Gradient */
+            background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #4a0000);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* --- 2. Glassmorphism Card Style --- */
+        .reveal .slides section {
+            height: 90vh; /* Full height utilization */
+            display: flex !important;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            border-radius: 20px;
+            padding: 40px;
+            width: 90%;
+            height: 85%;
+            overflow-y: auto; /* Scroll for long text */
+            text-align: left;
+            color: var(--text-color);
+            position: relative;
+        }
+
+        /* Title Style (24pt) */
+        .glass-card h2 {
+            font-size: var(--title-size) !important;
+            font-family: 'Playfair Display', serif; /* Elegant font for headers */
+            color: #ffccd5;
+            text-transform: none;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            line-height: 1.3;
+        }
+
+        /* Body Text Style (17pt) */
+        .glass-card p, .glass-card li, .glass-card div {
+            font-size: var(--body-size) !important;
+            line-height: 1.6;
+            font-weight: 300;
+            color: #eeeeee;
+        }
+
+        .glass-card strong {
+            color: #ff99ac;
+            font-weight: 700;
+        }
+
+        /* Scrollbar Styling */
+        .glass-card::-webkit-scrollbar { width: 8px; }
+        .glass-card::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
+        .glass-card::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius: 10px; }
+
+        /* --- 3. Interactive Elements --- */
+        .fragment.visible {
+            animation: fadeIn Up 0.8s ease-out;
+        }
+
+        /* Tables */
+        table.glass-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: var(--body-size);
+        }
+        table.glass-table th {
+            background: rgba(255,255,255,0.15);
+            padding: 10px;
+            color: #fff;
+        }
+        table.glass-table td {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 10px;
+        }
+
+        /* Color Palettes */
+        .palette-container {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .color-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            text-align: center;
+            border: 2px solid white;
+        }
+
+        /* Snow Effect */
+        .snowflake {
+            color: #fff;
+            font-size: 1em;
+            font-family: Arial;
+            text-shadow: 0 0 1px #000;
+            position: fixed;
+            top: -10%;
+            z-index: 9999;
+            user-select: none;
+            animation-name: snowflakes-fall, snowflakes-shake;
+            animation-duration: 10s, 3s;
+            animation-timing-function: linear, ease-in-out;
+            animation-iteration-count: infinite, infinite;
+            opacity: 0.3;
+        }
+        @keyframes snowflakes-fall { 0% { top: -10%; } 100% { top: 100%; } }
+        @keyframes snowflakes-shake { 0% { transform: translateX(0px); } 50% { transform: translateX(80px); } 100% { transform: translateX(0px); } }
+        
+        /* Generating random snow positions is done via JS or lots of CSS, keeping it simple here */
+        
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Snow Effect Elements -->
+    <div class="snowflake" style="left: 1%; animation-delay: 0s, 0s;">❄</div>
+    <div class="snowflake" style="left: 10%; animation-delay: 1s, 1s;">❅</div>
+    <div class="snowflake" style="left: 20%; animation-delay: 6s, .5s;">❆</div>
+    <div class="snowflake" style="left: 30%; animation-delay: 4s, 2s;">❄</div>
+    <div class="snowflake" style="left: 40%; animation-delay: 2s, 2s;">❅</div>
+    <div class="snowflake" style="left: 50%; animation-delay: 8s, 3s;">❆</div>
+    <div class="snowflake" style="left: 60%; animation-delay: 6s, 2s;">❄</div>
+    <div class="snowflake" style="left: 70%; animation-delay: 2.5s, 1s;">❅</div>
+    <div class="snowflake" style="left: 80%; animation-delay: 1s, 0s;">❆</div>
+    <div class="snowflake" style="left: 90%; animation-delay: 3s, 1.5s;">❄</div>
+
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- Page 1: Intro -->
+            <section data-transition="zoom">
+                <div class="glass-card" style="text-align: center; display:flex; flex-direction:column; justify-content:center;">
+                    <h1 style="font-size: 3rem !important; color: #ffccd5; margin-bottom: 20px;">2025 Christmas<br>Home Party Guide</h1>
+                    <h3 style="font-size: 1.5rem !important;">트렌드부터 실전 팁까지, 완벽한 연말을 위한 제안</h3>
+                    <div style="margin-top: 40px; font-size: 17pt;">
+                        <p class="fragment fade-up">🎄 가성비 럭셔리 (Affordable Luxury)</p>
+                        <p class="fragment fade-up">🏠 홈코노미와 쇼룸화</p>
+                        <p class="fragment fade-up">🍷 딥 버건디 & RMR 다이닝</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Page 2: Trends -->
+            <section>
+                <div class="glass-card">
+                    <h2>Page 1: 2025 홈파티의 새로운 패러다임</h2>
+                    <p>2025년 연말은 고물가 기조의 영향으로 외식보다는 집에서 즐기는 <strong>'가성비 럭셔리'</strong>가 핵심입니다.</p>
+                    <ul>
+                        <li class="fragment"><strong>고물가 시대의 대안:</strong> 4인 기준 20만원 이상의 외식비 부담을 줄이며 심리적 만족 극대화.</li>
+                        <li class="fragment"><strong>쇼룸화(Showroom):</strong> 집을 단순 거주 공간이 아닌, 취향을 전시하는 갤러리처럼 활용.</li>
+                        <li class="fragment"><strong>디지털+아날로그:</strong> 온라인 밀키트 주문과 손편지의 감성이 공존하는 하이브리드 파티.</li>
+                    </ul>
+                    <table class="glass-table fragment">
+                        <tr><th>키워드</th><th>내용</th></tr>
+                        <tr><td>소비 트렌드</td><td>가성비 럭셔리, 스몰 럭셔리</td></tr>
+                        <tr><td>장식 스타일</td><td>키치 & 레트로 (다이소 소품 활용)</td></tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Page 3: Culture Analysis -->
+            <section>
+                <div class="glass-card">
+                    <h2>Page 2: 변화하는 송년 모임 문화</h2>
+                    <div style="display: flex; gap: 20px;">
+                        <div style="flex: 1;">
+                            <p>떠들썩한 회식 대신, 소규모로 실속 있게 즐기는 문화가 정착되었습니다.</p>
+                            <ul>
+                                <li><strong>점심 회식 선호:</strong> 2030 세대 중심으로 업무 시간 내 식사 지향.</li>
+                                <li><strong>음주가무 퇴조:</strong> 건강을 생각하는 건전한 송년 문화.</li>
+                                <li><strong>홈파티 시장 급성장:</strong> 파자마, 보드게임 등 매출 수 배 증가.</li>
+                            </ul>
+                        </div>
+                        <div style="flex: 1;" class="chart-container">
+                            <canvas id="trendChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Page 4: Planning -->
+            <section>
+                <div class="glass-card">
+                    <h2>Page 3: 성공적인 홈파티 계획 & 예산</h2>
+                    <p>성공적인 파티는 꼼꼼한 체크리스트와 예산 배분에서 시작됩니다.</p>
+                    <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                        <i class="fas fa-check-circle"></i> <strong>체크리스트</strong>
+                        <br>테마 확정 → 인원 파악 → 예산 수립 → 리스트 작성 → 쇼핑
+                    </div>
+                    <p><strong>[4인 기준 20만원 예산 배분 예시]</strong></p>
+                    <table class="glass-table">
+                        <tr><th>항목</th><th>비율</th><th>금액</th></tr>
+                        <tr><td>식사/메인</td><td>45%</td><td>90,000원 (밀키트)</td></tr>
+                        <tr><td>음료/주류</td><td>20%</td><td>40,000원 (와인)</td></tr>
+                        <tr><td>디저트/장식</td><td>35%</td><td>70,000원</td></tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Page 5: Interior Color -->
+            <section>
+                <div class="glass-card">
+                    <h2>Page 4: 2025 인테리어 - 딥 버건디</h2>
+                    <p>올해는 쨍한 레드 대신, 공간에 무게감과 우아함을 주는 <strong>'딥 버건디'</strong>가 대세입니다.</p>
+                    <ul>
+                        <li><strong>색상 믹스매치:</strong> 버건디 + 더스티 핑크 + 실버 조합.</li>
+                        <li><strong>조명 온도:</strong> 형광등을 끄고 노란빛 앵두 전구와 LED 캔들 활용.</li>
+                        <li><strong>오브제:</strong> 어드벤트 캘린더 자체가 인테리어 소품이 됨.</li>
+                    </ul>
+                    <div class="palette-container fragment">
+                        <div class="color-circle" style="background:#800020;">Deep<br>Burgundy</div>
+                        <div class="color-circle" style="background:#c48d95; color:#333;">Dusty<br>Pink</div>
+                        <div class="color-circle" style="background:#2f4f4f;">Forest<br>Green</div>
+                        <div class="color-circle" style="background:#d4af37; color:#333;">Antique<br>Gold</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Page 6: DIY Tree -->
+            <section>
+                <div class="glass-card">
+                    <h2>Page 5: 좁은 공간을 위한 모서리 트리</h2>
+                    <p>트리 보관이 부담스럽다면? 벽 모서리를 활용한 가성비 DIY 트리가 정답입니다.</p>
+                    <div style="display: flex; gap: 20px; align-items: center;">
+                        <div style="flex: 1;">
+                            <ul>
+                                <li class="fragment"><strong>준비물:</strong> 다이소 미니후크, 풍성 모루, 전구 (총 7천원).</li>
+                                <li class="fragment"><strong>방법:</strong> 모서리에 지그재그로 모루를 걸고 전구 장식.</li>
+                                <li class="fragment"><strong>장점:</strong> 공간 차지 0%, 철거 시 테이프만 떼면 끝.</li>
+                                <li class="fragment"><strong>책 트리:</strong> 안 읽는 책을 쌓아 만드는 감성 트리도 인기.</li>
+                            </ul>
+                        </div>
+                        <div style="flex: 1; text-align: center; font-size: 5rem; color: #2ecc71;">
+                            <i class="fas fa-tree"></i>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Page 7: Table Setting -->
+            <section>
+                <div class="glass-card">
+                    <h2>Page 6: 전문가의 테이블 세팅 노하우</h2>
+                    <p>호텔급 분위기를 내는 핵심은 <strong>'입체감'</strong>과 <strong>'조화'</strong>입니다.</p>
+                    <ul>
+                        <li><strong>높낮이 조절:</strong> 모든 접시를 바닥에 두지 마세요. 케이크 스탠드나 책을 활용해 메인 요리를 높여주세요. 시선이 집중됩니다.</li>
+                        <li><strong>블랙 & 레드:</strong> 검정 테이블보는 음식의 색감을 극대화합니다. 여기에 붉은 석류나 딸기로 포인트를 주세요.</li>
+                        <li><strong>화병 활용:</strong> 스틱형 과자나 그리시니는 화병에 꽃처럼 꽂아두면 훌륭한 오브제가 됩니다.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Page 8: Food Trend 1 -->
+            <section>
+                <div class="glass-card">
+                    <h2>Page 7: 2025 푸드 - RMR의 진화</h2>
+                    <p>예약 전쟁 없이 집에서 즐기는 <strong>RMR(Restaurant Meal Replacement)</strong> 전성시대.</p>
+                    <ul>
+                        <li><strong>5성급의 맛:</strong> 토마호크 스테이크, 랍스터 등을 팬 하나로 완성.</li>
+                        <li><strong>이색 메뉴:</strong> '흑백요리사' 열풍으로 정지선 셰프의 딤섬 등 중식 메뉴도 파티 음식으로 급부상.</li>
+                        <li><strong>편의성:</strong> 셰프의 플레이팅 가이드가 포함되어 시각적 완성도 보장. 호스트는 요리 대신 대화에 집중하세요.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Page 9: Food Trend 2 -->
+            <section>
+                <div class="glass-card">
+                    <h2>Page 8: 양극화된 케이크 시장</h2>
+                    <p>케이크 소비는 <strong>초고가 호텔 케이크</strong> vs <strong>가성비 편의점 케이크</strong>로 나뉩니다.</p>
+                    <div style="display:flex; justify-content:space-between; margin-top:20px;">
+                        <div style="width:48%; background:rgba(255,255,255,0.05); padding:15px; border-radius:10px;">
+                            <h3 style="font-size:20pt !important; color:#ffd700;">호텔 프리미엄</h3>
+                            <p>10~20만원대. 화이트 트리 등 예술적 비주얼. SNS 인증샷 필수 아이템으로 조기 완판.</p>
+                        </div>
+                        <div style="width:48%; background:rgba(255,255,255,0.05); padding:15px; border-radius:10px;">
+                            <h3 style="font-size:20pt !important; color:#00ced1;">편의점 가성비</h3>
+                            <p>1~3만원대. 유명 캐릭터/아이돌 콜라보. 사전 예약 시 높은 할인율과 실용성.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Page 10: Drink -->
+            <section>
+                <div class="glass-card">
+                    <h2>Page 9: 크리스마스 와인 & 주류</h2>
+                    <p>술병 자체가 장식이 되는 <strong>한정판 패키지</strong>를 공략하세요.</p>
+                    <table class="glass-table">
+                        <tr><th>제품</th><th>특징</th><th>추천 상황</th></tr>
+                        <tr><td>모젤 리슬링</td><td>트리 모양 병 (재활용 가능)</td><td>테이블 센터피스</td></tr>
+                        <tr><td>산테로 모스카토</td><td>스파클링, 저렴한 가격</td><td>가벼운 파티 시작</td></tr>
+                        <tr><td>트리벤토 말벡</td><td>진한 레드, 육류와 조화</td><td>스테이크 메인 식사</td></tr>
+                    </table>
+                    <p style="margin-top:20px; font-size:14pt !important;">* 팁: 세라믹 전용잔이 포함된 맥주 패키지는 다이닝의 격을 높여줍니다.</p>
+                </div>
+            </section>
+
+            <!-- Page 11: Global 1 -->
+            <section>
+                <div class="glass-card">
+                    <h2>Page 10: 세계의 만찬 (아시아/유럽)</h2>
+                    <p>각국의 독특한 전통 요리로 이색적인 파티를 꾸며보세요.</p>
+                    <ul>
+                        <li><strong>🇯🇵 일본:</strong> KFC 치킨과 딸기 생크림 케이크 (예약 필수).</li>
+                        <li><strong>🇵🇭 필리핀:</strong> '노체 부에나' - 자정에 레촌(돼지구이) 파티.</li>
+                        <li><strong>🇩🇪 독일:</strong> 거위구이와 슈톨렌(말린 과일 빵).</li>
+                        <li><strong>🇮🇹 이탈리아:</strong> 파네토네와 판도로 빵을 와인과 함께.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Page 12: Global 2 -->
+            <section>
+                <div class="glass-card">
+                    <h2>Page 11: 세계의 만찬 (미주/오세아니아)</h2>
+                    <p>계절과 환경에 따라 달라지는 흥미로운 크리스마스 식탁.</p>
+                    <ul>
+                        <li><strong>🇺🇸 미국/🇨🇦 캐나다:</strong> 로스트 터키, 매쉬드 포테이토, 그레이비 소스. (전형적인 서구식 만찬)</li>
+                        <li><strong>🇦🇺 호주:</strong> 한여름의 크리스마스. 해산물 플래터와 야외 바비큐, 디저트로는 '파블로바' 인기.</li>
+                        <li><strong>🇧🇷 브라질:</strong> 칠면조와 브라질 너트, 화려한 색감의 쌀밥 요리로 늦은 밤까지 성대한 잔치.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Page 13: Music -->
+            <section>
+                <div class="glass-card">
+                    <h2>Page 12: 분위기를 완성하는 플레이리스트</h2>
+                    <p>2025년 트렌드는 <strong>K-캐럴</strong>과 <strong>재즈풍 시티팝</strong>입니다.</p>
+                    <ul>
+                        <li class="fragment"><strong>클래식 무드:</strong> 모차르트 '썰매 타기', 헨델 '메시아' (경건함).</li>
+                        <li class="fragment"><strong>우아한 디너:</strong> 피아노 트리오나 재즈 쿼텟으로 편곡된 캐럴. 대화를 방해하지 않는 BGM.</li>
+                        <li class="fragment"><strong>트렌디 파티:</strong> 데이식스, 프로미스나인 등 K-POP 아티스트의 겨울 시즌송.</li>
+                        <li class="fragment"><strong>팁:</strong> 유튜브 '에센셜' 등에서 'Cozy Christmas Jazz' 키워드 검색.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Page 14: Entertainment -->
+            <section>
+                <div class="glass-card">
+                    <h2>Page 13: 영화 & 게임 아이디어</h2>
+                    <p>식사 후 어색해진 공기를 깨트릴 엔터테인먼트가 필요합니다.</p>
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+                        <div>
+                            <h4>🎬 영화</h4>
+                            <ul>
+                                <li>나 홀로 집에 (클래식)</li>
+                                <li>러브 액츄얼리 (로맨스)</li>
+                                <li>해피뉴이어 (한국 감성)</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>🎮 게임</h4>
+                            <ul>
+                                <li><strong>화이트 엘리펀트:</strong> 선물 뺏고 뺏기 게임.</li>
+                                <li>닌텐도/보드게임 (다이소)</li>
+                                <li>포토존 인생샷 남기기</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Page 15: Gifts -->
+            <section>
+                <div class="glass-card">
+                    <h2>Page 14: 2025 선물 트렌드</h2>
+                    <p>보여주기식 명품보다는 <strong>'실용적인 힐링 아이템'</strong>이 대세입니다.</p>
+                    <table class="glass-table">
+                        <tr><th>가격대</th><th>추천 아이템</th></tr>
+                        <tr><td>1~3만원</td><td>어드벤트 캘린더, 핸드크림 (소확행)</td></tr>
+                        <tr><td>3~5만원</td><td>인센스 스틱, 프리미엄 티 세트 (휴식)</td></tr>
+                        <tr><td>5~10만원</td><td>미니어처 위스키, 소형 가전 (취향)</td></tr>
+                    </table>
+                    <p class="fragment" style="margin-top:15px; text-align:center;">💌 무엇보다 <strong>손편지</strong>가 최고의 선물입니다.</p>
+                </div>
+            </section>
+
+            <!-- Page 16: Hosting Tips -->
+            <section>
+                <div class="glass-card">
+                    <h2>Page 15: 완벽한 호스트가 되는 법</h2>
+                    <p>호스트가 행복해야 손님도 즐겁습니다. <strong>에너지 배분</strong>이 핵심!</p>
+                    <ul>
+                        <li><strong>컨디션 관리:</strong> 요리에 전력을 쏟지 마세요. RMR을 적극 활용하고 체력을 아껴 대화에 집중하세요.</li>
+                        <li><strong>커뮤니케이션:</strong> 낯선 손님끼리 섞일 수 있도록 공통 화제를 던져주세요.</li>
+                        <li><strong>정리 정돈:</strong> "우리 같이 치우고 2차 할까?" 유도하여 부담 나누기.</li>
+                        <li><strong>디테일:</strong> 네임카드 하나가 손님에게 '대접받는 느낌'을 줍니다.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Page 17: Eco -->
+            <section>
+                <div class="glass-card">
+                    <h2>Page 16: 제로웨이스트 에코 크리스마스</h2>
+                    <p>아름다운 축제 뒤, 환경을 생각하는 작은 실천이 필요합니다.</p>
+                    <ul>
+                        <li><strong>지속 가능한 트리:</strong> 플라스틱 트리 대신 반려식물을 꾸미거나, 벽트리 활용.</li>
+                        <li><strong>친환경 포장:</strong> 한번 쓰고 버리는 포장지 대신, 보자기나 신문지, 에코백을 활용한 센스 있는 포장.</li>
+                        <li><strong>절전:</strong> 24시간 점등 대신 타이머 콘센트를 활용해 밤에만 켜기.</li>
+                        <li><strong>글리터 자제:</strong> 미세플라스틱의 주범인 반짝이 가루 사용 줄이기.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Page 18: Pet Safety -->
+            <section>
+                <div class="glass-card">
+                    <h2>Page 17: 반려동물 안전 가이드</h2>
+                    <p>사랑하는 댕냥이에게 크리스마스는 위험할 수 있습니다.</p>
+                    <div style="background: rgba(255,0,0,0.1); padding: 20px; border-radius: 10px; border: 1px solid red;">
+                        <ul style="list-style: none; padding: 0;">
+                            <li>🚫 <strong>음식 주의:</strong> 초콜릿, 포도, 알코올, 뼈 있는 치킨 절대 금지.</li>
+                            <li>⚡ <strong>전선 주의:</strong> 트리의 전구를 씹지 않도록 보호캡 설치.</li>
+                            <li>🎄 <strong>장식물 주의:</strong> 유리볼 파편이나 작은 장식 삼킴 사고 대비.</li>
+                            <li>🏠 <strong>스트레스 케어:</strong> 시끄러운 파티 중 조용한 격리 공간 마련.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Page 19: Photo Tips -->
+            <section>
+                <div class="glass-card">
+                    <h2>Page 18: 파티 사진 촬영 꿀팁</h2>
+                    <p>어두운 실내에서도 분위기 있는 '인생샷'을 남기는 법.</p>
+                    <ul>
+                        <li><strong>플래시 활용:</strong> 실내는 어둡습니다. 플래시를 터뜨리고 셔터 속도를 살짝 늦추면(1/30초) 몽환적인 느낌이 납니다.</li>
+                        <li><strong>인물 중심:</strong> 배경이 어두울 땐 피사체에 가까이 다가가 프레임을 가득 채우세요.</li>
+                        <li><strong>자연스러움:</strong> "하나 둘 셋" 포즈보다는 웃고 떠드는 찰나의 순간을 연사로 찍으세요.</li>
+                        <li><strong>조명 활용:</strong> 트리 불빛을 배경(보케)으로 활용하면 따뜻한 감성이 살아납니다.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Page 20: Virtual Party -->
+            <section>
+                <div class="glass-card">
+                    <h2>Page 19: 가상(Virtual) 크리스마스 파티</h2>
+                    <p>멀리 있는 팀원, 친구들과 온라인으로 연결되는 법.</p>
+                    <ul>
+                        <li><strong>가상 선물 교환:</strong> 화면 공유로 선물 이미지를 띄우고 랜덤 뽑기. 실제 선물은 기프티콘 발송.</li>
+                        <li><strong>드레스 코드:</strong> 상의만이라도 산타복이나 빨간 옷 맞춰 입고 줌(Zoom) 접속.</li>
+                        <li><strong>화이트보드 게임:</strong> 캐치마인드, 눈사람 그리기 대회 등 온라인 툴 활용.</li>
+                        <li><strong>밀키트 통일:</strong> 같은 메뉴를 각자 집으로 배송시켜 동시에 먹으며 회식 느낌 내기.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Page 21: Closing -->
+            <section data-transition="zoom">
+                <div class="glass-card" style="text-align: center; display:flex; flex-direction:column; justify-content:center;">
+                    <h2 style="border:none;">Page 20: Happy Holiday!</h2>
+                    <p style="font-size: 20pt !important; margin-bottom: 30px;">
+                        파티의 마무리는 <strong>깔끔한 정리</strong>와 <strong>감사 인사</strong>입니다.<br>
+                        남은 음식은 소분하고, 조명은 안전하게 꺼주세요.
+                    </p>
+                    <div style="font-size: 1.5rem; color: #ffccd5; margin-top: 20px;">
+                        "행복한 크리스마스 홈파티는 화려한 장식보다<br>
+                        함께하는 사람들과 나누는 따뜻한 대화 속에 있습니다."
+                    </div>
+                    <p style="margin-top: 40px; font-size: 14pt;">2025 Home Party Guide Finished.</p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Reveal.js Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+    <script>
+        // Initialize Reveal
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            center: true,
+            hash: true,
+            transition: 'convex', // none/fade/slide/convex/concave/zoom
+            backgroundTransition: 'fade'
+        });
+
+        // Initialize Charts when the slide is shown
+        Reveal.on('slidechanged', event => {
+            if (event.currentSlide.querySelector('#trendChart')) {
+                renderTrendChart();
+            }
+        });
+
+        // Render Chart Function
+        let trendChartInstance = null;
+        function renderTrendChart() {
+            const ctx = document.getElementById('trendChart').getContext('2d');
+            if (trendChartInstance) return; // Prevent re-rendering
+
+            trendChartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['점심/식사 (2030)', '저녁/음주 (4050)', '기타'],
+                    datasets: [{
+                        data: [55, 30, 15],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.8)',
+                            'rgba(54, 162, 235, 0.8)',
+                            'rgba(255, 206, 86, 0.8)'
+                        ],
+                        borderColor: 'rgba(255,255,255,0.5)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { labels: { color: 'white', font: { size: 14 } } },
+                        title: { display: true, text: '2025 송년 모임 선호도', color: 'white', font: { size: 18 } }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
