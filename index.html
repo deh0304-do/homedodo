@@ -1,67 +1,112 @@
 <!doctype html>
-<html lang="ko">
+<html lang="ko" class="antialiased">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>생성형 AI 소개</title>
+  <title>생성형 AI — 학습용 메인 페이지</title>
+
+  <script>
+    // Tailwind Play CDN 구성: 다크 모드(class) 및 커스텀 색상
+    window.tailwind = {
+      config: {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'neon-purple': '#8b5cf6',
+              'neon-blue': '#06b6d4'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+
   <style>
-    :root{--bg:#f7fbff;--card:#ffffff;--accent:#2563eb;--muted:#555}
-    body{font-family:Inter,system-ui,Apple SD Gothic Neo,'Malgun Gothic',sans-serif;margin:0;background:var(--bg);color:#111}
-    .wrap{max-width:900px;margin:40px auto;padding:24px}
-    header{display:flex;align-items:center;gap:16px}
-    h1{margin:0;font-size:28px;color:var(--accent)}
-    p.lead{margin:8px 0 18px;color:var(--muted)}
-    .card{background:var(--card);border-radius:10px;padding:18px;box-shadow:0 6px 20px rgba(30,41,59,0.06);margin-bottom:14px}
-    h2{margin:0 0 8px;font-size:18px}
-    ul{margin:8px 0 0 18px}
-    footer{margin-top:20px;color:#666;font-size:13px;text-align:center}
-    @media (max-width:600px){.wrap{margin:20px;padding:16px}h1{font-size:22px}}
+    /* 추가 커스텀: Bento grid 높이 비율과 부드러운 전환 */
+    .bento { grid-auto-rows: minmax(120px, auto); }
+    .glass { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(8px); }
+    .glass-dark { background: rgba(10,10,10,0.45); border: 1px solid rgba(255,255,255,0.04); backdrop-filter: blur(8px); }
   </style>
 </head>
-<body>
-  <div class="wrap">
-    <header>
-      <h1>생성형 AI(Generative AI)란?</h1>
-    </header>
-    <p class="lead">생성형 AI는 텍스트, 이미지, 오디오, 코드 등 새롭고 의미 있는 콘텐츠를 만들어내는 인공지능 기술입니다.</p>
+<body class="min-h-screen bg-[#0a0a0a] text-slate-100">
+  <div class="max-w-6xl mx-auto p-6">
+    <div class="flex items-center justify-between mb-6">
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-neon-purple to-neon-blue shadow-lg flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6l4 2"/></svg>
+        </div>
+        <div>
+          <h1 class="text-2xl font-semibold tracking-tight">생성형 AI — 학습용 사이트</h1>
+          <p class="text-sm text-slate-300">Glassmorphism + Bento Grid · 다크/라이트 테마 지원</p>
+        </div>
+      </div>
 
-    <section class="card" id="what">
-      <h2>정의</h2>
-      <p>생성형 AI는 대규모 데이터로 학습한 모델을 바탕으로 입력(프롬프트)을 받아 새로운 출력을 생성합니다. 예: 글쓰기 보조, 이미지 합성, 코드 생성 등.</p>
-    </section>
+      <div class="flex items-center gap-3">
+        <button id="themeToggle" class="px-3 py-2 rounded-lg glass hover:scale-105 transition-transform duration-200">테마 전환</button>
+      </div>
+    </div>
 
-    <section class="card" id="how">
-      <h2>작동 원리 (간단 정리)</h2>
-      <ul>
-        <li>학습: 대규모 텍스트·이미지 데이터를 사용해 패턴을 학습합니다.</li>
-        <li>모델: 트랜스포머 같은 구조가 흔히 사용됩니다.</li>
-        <li>생성: 확률적으로 다음 토큰(문자/단어/픽셀 등)을 예측해 출력물을 만듭니다.</li>
-      </ul>
-    </section>
+    <!-- Bento Grid -->
+    <main class="grid bento grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <article class="col-span-1 lg:col-span-2 row-span-1 p-6 rounded-2xl glass hover:scale-105 hover:shadow-[0_8px_40px_rgba(139,92,246,0.18)] transition transform duration-300">
+        <h2 class="text-xl font-semibold mb-2">생성형 AI란?</h2>
+        <p class="text-sm text-slate-200/80">대규모 데이터로 학습한 모델이 프롬프트를 받아 텍스트, 이미지, 오디오, 코드 등 새로운 콘텐츠를 생성하는 기술입니다.</p>
+      </article>
 
-    <section class="card" id="examples">
-      <h2>주요 활용 예</h2>
-      <ul>
-        <li>텍스트: 기사 작성, 요약, 번역, 대화형 에이전트</li>
-        <li>이미지: 텍스트 기반 이미지 생성, 스타일 변환</li>
-        <li>오디오/비디오: 음성 합성, 간단한 영상 제작 보조</li>
-        <li>코드: 코드 자동 완성 및 생성</li>
-      </ul>
-    </section>
+      <section class="p-6 rounded-2xl glass hover:scale-105 hover:shadow-[0_8px_40px_rgba(6,182,212,0.14)] transition transform duration-300">
+        <h3 class="font-semibold">핵심 모델</h3>
+        <ul class="mt-3 text-sm space-y-1 text-slate-200/85">
+          <li>LLM(대형 언어 모델) — 텍스트 생성</li>
+          <li>Diffusion/Transformer 기반 이미지 모델 — 이미지 합성</li>
+          <li>음성 합성 모델 — TTS</li>
+        </ul>
+      </section>
 
-    <section class="card" id="risks">
-      <h2>이점과 주의점</h2>
-      <ul>
-        <li>이점: 생산성 향상, 창작 도구로서의 확장성</li>
-        <li>주의: 허위 정보, 저작권 문제, 편향성, 프라이버시 침해 가능성</li>
-      </ul>
-      <p style="margin-top:8px;color:var(--muted)">책임 있는 사용과 검증, 정책·규제 마련이 중요합니다.</p>
-    </section>
+      <section class="p-6 rounded-2xl glass hover:scale-105 hover:shadow-[0_8px_40px_rgba(139,92,246,0.14)] transition transform duration-300">
+        <h3 class="font-semibold">역사 한눈에</h3>
+        <p class="mt-2 text-sm text-slate-200/85">2010s: 딥러닝 발전 → 2020s: 트랜스포머·대규모 사전학습 · 2020s 중후반: 멀티모달·실용화 확대</p>
+      </section>
 
-    <footer>
-      <div>간단한 소개 페이지 — 더 자세한 내용을 원하시면 알려주세요.</div>
-      <div style="margin-top:6px;font-size:12px;color:#999">작성일: 2025-12-24</div>
-    </footer>
+      <article class="col-span-1 lg:col-span-2 p-6 rounded-2xl glass hover:scale-105 hover:shadow-[0_8px_40px_rgba(99,102,241,0.14)] transition transform duration-300">
+        <h3 class="font-semibold">활용 사례</h3>
+        <div class="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+          <div class="p-3 rounded-lg bg-gradient-to-br from-white/3 to-white/2">콘텐츠 생성 · 카피라이팅</div>
+          <div class="p-3 rounded-lg bg-gradient-to-br from-white/3 to-white/2">이미지/디자인 보조</div>
+          <div class="p-3 rounded-lg bg-gradient-to-br from-white/3 to-white/2">코드 자동완성</div>
+          <div class="p-3 rounded-lg bg-gradient-to-br from-white/3 to-white/2">교육·연구 보조</div>
+        </div>
+      </article>
+
+      <section class="p-6 rounded-2xl glass hover:scale-105 hover:shadow-[0_8px_40px_rgba(6,182,212,0.18)] transition transform duration-300">
+        <h3 class="font-semibold">이점 & 주의</h3>
+        <ul class="mt-3 text-sm text-slate-200/85 space-y-1">
+          <li>이점: 생산성 향상, 창의성 확장</li>
+          <li>주의: 허위정보, 저작권, 편향</li>
+        </ul>
+      </section>
+
+    </main>
+
+    <footer class="mt-8 text-center text-sm text-slate-400">작성일: 2025‑12‑24 · 학습용 예시 페이지</footer>
   </div>
+
+  <script>
+    // 테마 토글: html에 'dark' 클래스 토글, 로컬스토리지에 저장
+    const themeToggle = document.getElementById('themeToggle');
+    const root = document.documentElement;
+    function setTheme(dark) {
+      if (dark) root.classList.add('dark'); else root.classList.remove('dark');
+      localStorage.setItem('prefers-dark', dark ? '1' : '0');
+    }
+    // 초기값: 저장된 값 우선, 없으면 시스템 색상 우선
+    const saved = localStorage.getItem('prefers-dark');
+    if (saved === null) setTheme(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    else setTheme(saved === '1');
+    themeToggle.addEventListener('click', () => setTheme(!document.documentElement.classList.contains('dark')));
+
+    // 마우스 호버 시 네온 경계 라이트 효과를 위해 CSS 변수 조절 가능
+  </script>
 </body>
 </html>
