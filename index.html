@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>생성형 AI 소개</title>
+  <style>
+    :root{--bg:#f7fbff;--card:#ffffff;--accent:#2563eb;--muted:#555}
+    body{font-family:Inter,system-ui,Apple SD Gothic Neo,'Malgun Gothic',sans-serif;margin:0;background:var(--bg);color:#111}
+    .wrap{max-width:900px;margin:40px auto;padding:24px}
+    header{display:flex;align-items:center;gap:16px}
+    h1{margin:0;font-size:28px;color:var(--accent)}
+    p.lead{margin:8px 0 18px;color:var(--muted)}
+    .card{background:var(--card);border-radius:10px;padding:18px;box-shadow:0 6px 20px rgba(30,41,59,0.06);margin-bottom:14px}
+    h2{margin:0 0 8px;font-size:18px}
+    ul{margin:8px 0 0 18px}
+    footer{margin-top:20px;color:#666;font-size:13px;text-align:center}
+    @media (max-width:600px){.wrap{margin:20px;padding:16px}h1{font-size:22px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>생성형 AI(Generative AI)란?</h1>
+    </header>
+    <p class="lead">생성형 AI는 텍스트, 이미지, 오디오, 코드 등 새롭고 의미 있는 콘텐츠를 만들어내는 인공지능 기술입니다.</p>
+
+    <section class="card" id="what">
+      <h2>정의</h2>
+      <p>생성형 AI는 대규모 데이터로 학습한 모델을 바탕으로 입력(프롬프트)을 받아 새로운 출력을 생성합니다. 예: 글쓰기 보조, 이미지 합성, 코드 생성 등.</p>
+    </section>
+
+    <section class="card" id="how">
+      <h2>작동 원리 (간단 정리)</h2>
+      <ul>
+        <li>학습: 대규모 텍스트·이미지 데이터를 사용해 패턴을 학습합니다.</li>
+        <li>모델: 트랜스포머 같은 구조가 흔히 사용됩니다.</li>
+        <li>생성: 확률적으로 다음 토큰(문자/단어/픽셀 등)을 예측해 출력물을 만듭니다.</li>
+      </ul>
+    </section>
+
+    <section class="card" id="examples">
+      <h2>주요 활용 예</h2>
+      <ul>
+        <li>텍스트: 기사 작성, 요약, 번역, 대화형 에이전트</li>
+        <li>이미지: 텍스트 기반 이미지 생성, 스타일 변환</li>
+        <li>오디오/비디오: 음성 합성, 간단한 영상 제작 보조</li>
+        <li>코드: 코드 자동 완성 및 생성</li>
+      </ul>
+    </section>
+
+    <section class="card" id="risks">
+      <h2>이점과 주의점</h2>
+      <ul>
+        <li>이점: 생산성 향상, 창작 도구로서의 확장성</li>
+        <li>주의: 허위 정보, 저작권 문제, 편향성, 프라이버시 침해 가능성</li>
+      </ul>
+      <p style="margin-top:8px;color:var(--muted)">책임 있는 사용과 검증, 정책·규제 마련이 중요합니다.</p>
+    </section>
+
+    <footer>
+      <div>간단한 소개 페이지 — 더 자세한 내용을 원하시면 알려주세요.</div>
+      <div style="margin-top:6px;font-size:12px;color:#999">작성일: 2025-12-24</div>
+    </footer>
+  </div>
+</body>
+</html>
